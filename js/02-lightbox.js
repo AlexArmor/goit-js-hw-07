@@ -15,15 +15,4 @@ function createGallaryMarkup() {
 
 createGallaryMarkup();
 
-galleryGroup.addEventListener('click', onGalleryClick);
-
-function onGalleryClick(e) {
-    e.preventDefault();
-    // if (e.target.nodeName !== "IMG") {
-    //     return;
-    // }
-    var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
-    console.log(lightbox);
-    lightbox.options.captionsData = 'alt';
-    lightbox.options.captionDelay = 250;
-}
+var lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
