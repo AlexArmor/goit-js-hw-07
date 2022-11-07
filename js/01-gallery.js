@@ -4,8 +4,8 @@ import { galleryItems } from './gallery-items.js';
 const galleryGroup = document.querySelector('.gallery');
 
 function createGallaryMarkup() {
-    const markup = galleryItems.map(elem => {
-        return `<div class="gallery__item">
+  const markup = galleryItems.map(elem => {
+    return `<div class="gallery__item">
         <a class="gallery__link" href="${elem.original}">
           <img
             class="gallery__image"
@@ -15,9 +15,9 @@ function createGallaryMarkup() {
           />
         </a>
       </div>`
-    }).join('');
+  }).join('');
 
-    galleryGroup.innerHTML = markup;
+  galleryGroup.innerHTML = markup;
 }
 
 createGallaryMarkup();
@@ -25,20 +25,23 @@ createGallaryMarkup();
 galleryGroup.addEventListener('click', onGalleryClick);
 
 function onGalleryClick(e) {
-    e.preventDefault();
-    if (e.target.nodeName !== "IMG") {
-        return;
-    }
-    const selectedIMG = e.target.dataset.source;
-    const instance = basicLightbox.create(`
+  e.preventDefault();
+  if (e.target.nodeName !== "IMG") {
+    return;
+  }
+  const selectedIMG = e.target.dataset.source;
+  const instance = basicLightbox.create(`
     <img src="${selectedIMG}">
-    `)
+    `, {
+    onShow: (instance) => window.onkeydown = (event) => {
+      if (event.key === "Escape") {
+        instance.close();
+      }
+      console.log('click');
+    },
+    onClose: () => window.onkeydown = null
+  })
 
-    instance.show()
-
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-            instance.close()
-        }
-    });
+  instance.show();
+  console.log(window);
 }
