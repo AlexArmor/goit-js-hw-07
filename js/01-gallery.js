@@ -37,11 +37,9 @@ function onGalleryClick(e) {
       if (event.key === "Escape") {
         instance.close();
       }
-      console.log('click');
     },
     onClose: () => window.onkeydown = null
   })
 
   instance.show();
-  console.log(window);
 }
